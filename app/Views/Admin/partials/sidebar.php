@@ -47,13 +47,13 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#"><i
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/berita') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>Berita</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><i
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/galeri') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>Galeri</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><i
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/ppdb') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>PPDB</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><i
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/guru') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>Guru</span></a></li>
         </ul>
         <!-- End of Sidebar -->

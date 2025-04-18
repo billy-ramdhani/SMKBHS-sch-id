@@ -20,8 +20,8 @@
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Berita</h6>
-                    <a href="<?= base_url('admin/berita/create') ?>" class="btn btn-primary btn-sm">Tambah Berita</a>
+                    <h6 class="m-0 font-weight-bold text-primary">Data Galeri</h6>
+                    <a href="<?= base_url('admin/galeri/create') ?>" class="btn btn-primary btn-sm">Tambah Galeri</a>
                 </div>
                 <div class="card-body">
                     <?php if (session()->getFlashdata('success')) : ?>
@@ -34,25 +34,26 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
-                                <th>Isi</th>
-                                <th>Penulis</th>
+                                <th>Gambar</th>
+                                <th>Deskripsi</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($berita as $b) : ?>
+                            <?php foreach ($galeri as $g) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $b['judul'] ?></td>
-                                <td><?= $b['isi'] ?></td>
-                                <td><?= $b['penulis'] ?></td>
-                                <td><?= $b['tanggal'] ?></td>
+                                <td><?= $g['judul'] ?></td>
+                                <td><img src="<?= base_url('uploads/galeri/' . $g['gambar']) ?>"
+                                        alt="<?= $g['judul'] ?>" width="100"></td>
+                                <td><?= $g['deskripsi'] ?></td>
+                                <td><?= $g['tanggal'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('admin/berita/berita_edit/' . $b['id']) ?>"
+                                    <a href="<?= base_url('admin/galeri/galeri_edit/' . $g['id']) ?>"
                                         class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="<?= base_url('admin/berita/delete/' . $b['id']) ?>"
+                                    <a href="<?= base_url('admin/galeri/delete/' . $g['id']) ?>"
                                         class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>

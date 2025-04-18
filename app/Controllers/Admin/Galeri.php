@@ -3,26 +3,26 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\M_Berita;
+use App\Models\M_Galeri;
 
-class Berita extends BaseController
+class Galeri extends BaseController
 {
-    protected $m_berita;
+    protected $m_galeri;
 
     public function __construct()
     {
-        $this->m_berita = new M_Berita();
+        $this->m_galeri = new M_Galeri();
     }
 
     public function index()
     {
-        $data['berita'] = $this->m_berita->findAll();
-        return view('admin/berita', $data);
+        $data['galeri'] = $this->m_galeri->findAll();
+        return view('admin/galeri', $data);
     }
 
     public function create()
     {
-        return view('admin/berita_create');
+        return view('admin/galeri_create');
     }
 
     public function store()
@@ -34,12 +34,13 @@ class Berita extends BaseController
                 $newName = $file->getRandomName();
                 $file->move(WRITEPATH . 'uploads', $newName);
 
-                $this->m_berita->save([
+                $this->m_galeri->save([
                     'judul' => $this->request->getPost('judul'),
-                    'isi' => $this->request->getPost('isi'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
+                    'kategori' => $this->request->getPost('kategori'),
                     'gambar' => $newName,
-                    'penulis' => session()->get('username'),
-                    'tanggal' => date('Y-m-d'),
+                    'uploaded_by' => session()->get('username'),
+                    'created_at' => date('Y-m-d H:i:s'),
                 ]);
             } else {
                 return redirect()->back()->with('error', 'File harus berupa JPG, JPEG, atau PNG dan maksimal 3MB.');
@@ -47,21 +48,22 @@ class Berita extends BaseController
         } else {
             return redirect()->back()->with('error', 'Gagal mengupload gambar.');
         }
-        return redirect()->to('/admin/berita')->with('success', 'Berita berhasil ditambahkan!');
+        return redirect()->to('/admin/galeri')->with('success', 'Galeri berhasil ditambahkan!');
     }
 
-    public function berita_edit($id)
+    public function galeri_edit($id)
     {
-        $berita = $this->m_berita->find($id);
-        if (!$berita) {
-            return redirect()->to('/admin/berita')->with('error', 'Berita tidak ditemukan.');
+        $galeri = $this->m_galeri->find($id);
+        if (!$galeri) {
+            return redirect()->to('/admin/galeri')->with('error', 'Galeri tidak ditemukan.');
         }
-        $data['berita'] = $berita;
-        return view('admin/berita_edit', $data);
+        $data['galeri'] = $galeri;
+        return view('admin/galeri_edit', $data);
     }
+
     public function update($id)
     {
-        $berita = $this->m_berita->find($id);
+        $galeri = $this->m_galeri->find($id);
         $file = $this->request->getFile('gambar');
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
@@ -71,30 +73,38 @@ class Berita extends BaseController
                 $file->move(WRITEPATH . 'uploads', $newName);
 
                 // Delete old file if exists
-                if ($berita['gambar'] && file_exists(WRITEPATH . 'uploads/' . $berita['gambar'])) {
-                    unlink(WRITEPATH . 'uploads/' . $berita['gambar']);
+                if ($galeri['gambar'] && file_exists(WRITEPATH . 'uploads/' . $galeri['gambar'])) {
+                    unlink(WRITEPATH . 'uploads/' . $galeri['gambar']);
                 }
 
-                $this->m_berita->update($id, [
+                $this->m_galeri->update($id, [
                     'judul' => $this->request->getPost('judul'),
-                    'isi' => $this->request->getPost('isi'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
                     'gambar' => $newName,
                 ]);
             } else {
                 return redirect()->back()->with('error', 'File harus berupa JPG, JPEG, atau PNG dan maksimal 3MB.');
             }
         } else {
-            $this->m_berita->update($id, [
+            $this->m_galeri->update($id, [
                 'judul' => $this->request->getPost('judul'),
-                'isi' => $this->request->getPost('isi'),
+                'deskripsi' => $this->request->getPost('deskripsi'),
             ]);
         }
 
-        return redirect()->to('/admin/berita')->with('success', 'Berita berhasil diupdate!');
+        return redirect()->to('/admin/galeri')->with('success', 'Galeri berhasil diupdate!');
     }
+
     public function delete($id)
     {
-        $this->m_berita->delete($id);
-        return redirect()->to('/admin/berita')->with('success', 'Berita berhasil dihapus!');
+        $galeri = $this->m_galeri->find($id);
+
+        // Delete image file if exists
+        if ($galeri['gambar'] && file_exists(WRITEPATH . 'uploads/' . $galeri['gambar'])) {
+            unlink(WRITEPATH . 'uploads/' . $galeri['gambar']);
+        }
+
+        $this->m_galeri->delete($id);
+        return redirect()->to('/admin/galeri')->with('success', 'Galeri berhasil dihapus!');
     }
 }

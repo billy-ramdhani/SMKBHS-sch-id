@@ -29,6 +29,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->post('berita/store', 'Berita::store', ['filter' => 'auth']);
     $routes->get('berita/edit/(:segment)', 'Berita::edit/$1', ['filter' => 'auth']);
     $routes->post('berita/update/(:segment)', 'Berita::update/$1', ['filter' => 'auth']);
+    $routes->get('berita/berita_edit/(:segment)', 'Berita::berita_edit/$1', ['filter' => 'auth']);
     $routes->get('berita/delete/(:segment)', 'Berita::delete/$1', ['filter' => 'auth']);
     $routes->get('galeri', 'Galeri::index', ['filter' => 'auth']);
+    $routes->get('galeri/create', 'Galeri::create', ['filter' => 'auth']);
+    $routes->post('galeri/store', 'Galeri::store', ['filter' => 'auth']);
+    $routes->get('galeri/edit/(:segment)', 'Galeri::edit/$1', ['filter' => 'auth']);
+    $routes->post('galeri/update/(:segment)', 'Galeri::update/$1', ['filter' => 'auth']);
+    $routes->get('galeri/galeri_edit/(:segment)', 'Galeri::galeri_edit/$1', ['filter' => 'auth']);
+    $routes->get('galeri/delete/(:segment)', 'Galeri::delete/$1', ['filter' => 'auth']);
 });

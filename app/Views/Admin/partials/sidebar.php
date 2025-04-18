@@ -49,11 +49,27 @@
             </li>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/berita') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>Berita</span></a></li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfil"
+                    aria-expanded="true" aria-controls="collapseProfil">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Profil</span>
+                </a>
+                <div id="collapseProfil" class="collapse" aria-labelledby="headingProfil"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Profil:</h6>
+                        <a class="collapse-item" href="">Tentang Sekolah</a>
+                        <a class="collapse-item" href="">Visi & Misi</a>
+                        <a class="collapse-item" href="">Struktur Organisasi</a>
+                        <a class="collapse-item" href="<?= base_url('admin/guru') ?>">Guru dan Tendik</a>
+                    </div>
+                </div>
+            </li>
+
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/galeri') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>Galeri</span></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/ppdb') ?>"><i
                         class="fas fa-fw fa-tachometer-alt"></i><span>PPDB</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/guru') ?>"><i
-                        class="fas fa-fw fa-tachometer-alt"></i><span>Guru</span></a></li>
         </ul>
         <!-- End of Sidebar -->
